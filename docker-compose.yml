@@ -1,0 +1,12 @@
+services:
+  vault:
+    image: hashicorp/vault:latest
+    ports:
+      - "8200:8200"
+    volumes:
+      - ./config:/vault/config
+      - ./vault-config.hcl:/vault/config/vault-config.hcl:ro
+      - ./data:/vault/file
+    cap_add:
+      - IPC_LOCK
+    command: vault server -config=/vault/config/vault-config.hcl
